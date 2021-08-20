@@ -155,20 +155,12 @@ public class BinarySearchTree {
         }else if(root.l==null){ //When there is only one right node in the tree.
             return root.r;
         }else { //When there are two children in the tree.
-            int newNumber = rightMost(root.l);
+            int newNumber = rightMostNode(root.l);
             root.number = newNumber;
             root.l = deleteRightMost(root.l);
             return root;
         }
     }//delete
-
-    //This method is to find the right-most node in the tree.
-    private int rightMost(Node root){
-        if(root.r==null){ //When there is not right node anymore, then it is the right-most node.
-            return root.number;
-        }
-        return rightMost(root.r);
-    }//rightMost
 
     //This method is deleting the right-most node in the subtree.
     private Node deleteRightMost(Node root){
@@ -179,5 +171,12 @@ public class BinarySearchTree {
         return root;
     }//deleteRightMost
 
-
+  //This method is to find the right-most node in the tree.
+    private int rightMostNode(Node root){
+        if(root.r==null){ //When there is not right node anymore, then it is the right-most node.
+            return root.number;
+        }
+        return rightMostNode(root.r);
+    }//rightMost
+  
 }
