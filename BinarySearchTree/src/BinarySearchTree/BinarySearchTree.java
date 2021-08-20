@@ -6,15 +6,15 @@ package BinarySearchTree;
 
 public class BinarySearchTree {
 
-    private Node root;
+    public static Node root;
 
     //This method is to insert new number input by users.
-    private void insert(int number){
+    public static void insert(int number){
         root = insertToTree(root, number);
     }//insert
 
     //This method is inserting the number to a tree.
-    private Node insertToTree(Node root, int number){
+    public static Node insertToTree(Node root, int number){
         Node newTree; //To make subtrees.
         if(root==null){
             return new Node(number);
@@ -34,7 +34,7 @@ public class BinarySearchTree {
     }//insertToTree
 
     //This method is comparing two values recursively.
-    private Node compare(Node root, int number) {
+    private static Node compare(Node root, int number) {
         if (root == null || root.number == number) {
             return root;
         } else {
@@ -46,12 +46,12 @@ public class BinarySearchTree {
     }//compare
 
     //This method is to start the comparision between the numbers of nodes.
-    public Node compareStart(int number){
+    public static Node compareStart(int number){
         return compare(root, number);
     }//compareStart
 
     //This method is to find the maximum number of the tree (Rightmost number).
-    public int findMaximum(){
+    public static int findMaximum(){
         Node temp = root;
         if (root == null){
             throw new ExceptionHandling("The input value is necessary.");
@@ -64,7 +64,7 @@ public class BinarySearchTree {
     }//findMaximum
 
     //This method is to find the minimum number of the tree (Leftmost number).
-    public int findMinimum(){
+    public static int findMinimum(){
         Node temp2 = root;
         if (root==null){
             throw new ExceptionHandling("The inpub value is needed.");
@@ -76,56 +76,56 @@ public class BinarySearchTree {
     }//findMinimum
 
     //This method is an in-order traversal of the tree.
-    public void in_order_tree(){
+    public static void in_order_tree(){
         inorder(root);
     }//in_order_tree
 
     //This method is in-order traversal. (left->root->right)
-    private void inorder(Node root){
+    private static void inorder(Node root){
         if(root!=null){
             inorder(root.l);
-            System.out.println(root.number);
+            System.out.print(root.number + " ");
             inorder(root.r);
         }
     }//inorder
 
     //This method is a pre-order traversal of the tree.
-    public void pre_order_tree(){
+    public static void pre_order_tree(){
         preorder(root);
     }//pre_order_tree
 
     //This method is pre-order traversal. (root->left->right)
     //Top to bottom.
-    private void preorder(Node root){
+    private static void preorder(Node root){
         if(root!=null){
-            System.out.println(root.number);
+            System.out.print(root.number + " ");
             preorder(root.l);
             preorder(root.r);
         }
     }//preorder
 
     //This method is a post-order traversal of the tree.
-    public void post_order_tree(){
+    public static void post_order_tree(){
         postorder(root);
     }//postorder
 
     //This method is post-order traversal. (left->right->root)
     //Bottom to top.
-    private void postorder(Node root){
+    private static void postorder(Node root){
         if(root!=null){
             postorder(root.l);
             postorder(root.r);
-            System.out.println(root.number);
+            System.out.print(root.number + " ");
         }
     }//postorder
 
     //This method is to delete a root's number.
-    public void deleteNumber(int number){
+    public static void deleteNumber(int number){
         root = deletedTree(root, number);
     }//deleteNumber
 
     //This method is searching the tree in order to delete the user's number.
-    private Node deletedTree(Node root, int number){
+    private static Node deletedTree(Node root, int number){
         Node newTree;
         if(root==null){
             throw new ExceptionHandling("It is an empty tree.");
@@ -146,7 +146,7 @@ public class BinarySearchTree {
     }//deletedTree
 
     //This method is actually deleting a root existed in the tree.
-    private Node delete(Node root){
+    private static Node delete(Node root){
         if(root.r==null && root.l==null){ //When there's only one root existed.
             return null;
         }
@@ -162,8 +162,16 @@ public class BinarySearchTree {
         }
     }//delete
 
+    //This method is to find the right-most node in the tree.
+    private static int rightMostNode(Node root){
+        if(root.r==null){ //When there is not right node anymore, then it is the right-most node.
+            return root.number;
+        }
+        return rightMostNode(root.r);
+    }//rightMost
+
     //This method is deleting the right-most node in the subtree.
-    private Node dRightMost(Node root){
+    private static Node dRightMost(Node root){
         if(root.r==null){
             return root.l;
         }
@@ -171,12 +179,5 @@ public class BinarySearchTree {
         return root;
     }//deleteRightMost
 
-  //This method is to find the right-most node in the tree.
-    private int rightMostNode(Node root){
-        if(root.r==null){ //When there is not right node anymore, then it is the right-most node.
-            return root.number;
-        }
-        return rightMostNode(root.r);
-    }//rightMost
-  
-}
+
+}//BinarySearchTree
