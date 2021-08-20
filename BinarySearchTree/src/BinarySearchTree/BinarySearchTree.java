@@ -157,17 +157,17 @@ public class BinarySearchTree {
         }else { //When there are two children in the tree.
             int newNumber = rightMostNode(root.l);
             root.number = newNumber;
-            root.l = deleteRightMost(root.l);
+            root.l = dRightMost(root.l);
             return root;
         }
     }//delete
 
     //This method is deleting the right-most node in the subtree.
-    private Node deleteRightMost(Node root){
+    private Node dRightMost(Node root){
         if(root.r==null){
             return root.l;
         }
-        root.r = deleteRightMost(root.r);
+        root.r = dRightMost(root.r);
         return root;
     }//deleteRightMost
 
